@@ -18,23 +18,30 @@ class Gajiku extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AuthBloc(
-                AuthRepo(),
-                UserInfoRepository()),
-          ),
-        ],
-        child: MaterialApp(
-          initialRoute: '/',
-          routes: {
-            '/': (context) => Login(),
-            '/manager': (context) => Manager(),
-            '/admin': (context) => Admin(),
-            '/client': (context) => Client()
-          },
-        )
+    return MaterialApp(
+      title: 'Gajiku',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AuthBloc(
+                  AuthRepo(),
+                  UserInfoRepository()),
+            ),
+          ],
+          child: MaterialApp(
+            initialRoute: '/',
+            routes: {
+              '/': (context) => Login(),
+              '/manager': (context) => Manager(),
+              '/admin': (context) => Admin(),
+              '/client': (context) => Client()
+            },
+          )
+      ),
     );
   }
 }

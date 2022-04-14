@@ -85,6 +85,9 @@ class _ClientState extends State<Client> {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
               accountName: Text(_name),
               accountEmail: Text(_email),
               currentAccountPicture: CircleAvatar(

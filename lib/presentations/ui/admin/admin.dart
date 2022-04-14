@@ -11,12 +11,14 @@ class Admin extends StatefulWidget {
 
 class _AdminState extends State<Admin> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String _notif = "10";
   String _name = "";
-  String _notif = "9";
+  String _email = "";
 
   getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      _email = prefs.getString("email")!;
       _name = prefs.getString("name")!;
     });
   }
@@ -30,6 +32,7 @@ class _AdminState extends State<Admin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const ClipRRect(
           borderRadius: BorderRadius.only(
@@ -76,6 +79,41 @@ class _AdminState extends State<Admin> {
             ],
           )
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.indigo,
+              ),
+              accountName: Text(_name),
+              accountEmail: Text(_email),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/budget.png"),
+              ),
+            ),
+            ListTile(
+              title: Text("Home"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text("Pengaturan"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Laporan"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Logout"),
+              onTap: () {
+                Navigator.of(context).pushNamed('/');
+              },
+            )
+          ],
+        ),
       ),
       body: Center(
         child: Text(
