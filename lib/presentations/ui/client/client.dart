@@ -1,0 +1,131 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
+class Client extends StatefulWidget {
+  const Client({Key? key}) : super(key: key);
+
+  @override
+  State<Client> createState() => _ClientState();
+}
+
+class _ClientState extends State<Client> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String notif = "10";
+  String _name = "";
+  String _email = "";
+  String _username = "";
+
+
+  getPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _email = prefs.getString("email")!;
+      _name = prefs.getString("name")!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPref();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: const ClipRRect(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(0.0), topRight: Radius.circular(0.0)),
+          child: Text("Client Page"),
+        ),
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: IconButton(
+                onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                icon: const Icon(Icons.menu, size: 32, color: Colors.white))),
+        backgroundColor: Colors.green,
+        elevation: 0,
+        actions: [
+          Stack(
+            children: [
+              IconButton(
+                  padding: const EdgeInsets.only(right: 15.0, top: 15.0),
+                  onPressed: () {},
+                  icon: const Icon(Icons.email, color: Colors.white)
+              ),
+              notif == "0" ? Container() : Positioned(
+                right: 13.0,
+                top: 10.0,
+                child: Stack(
+                  children: [
+                    Icon(
+                        Icons.brightness_1,
+                        size: 20.0,
+                        color: Colors.redAccent
+                    ),
+                    Positioned(
+                      top: 3.0,
+                      right: 6.0,
+                      child: Text(
+                          notif,
+                          style: TextStyle(color: Colors.white, fontSize: 11.0
+                          )
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text(_name),
+              accountEmail: Text(_email),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/budget.png"),
+              ),
+            ),
+            ListTile(
+              title: Text("Test"),
+              onTap: () {
+                Navigator.of(context).pushNamed('/test');
+              },
+            ),
+            ListTile(
+              title: const Text("Master Data"),
+              onTap: () {
+                Navigator.of(context).pushNamed('/profile');
+              },
+            ),
+            ListTile(
+              title: Text("Riwayat Transaksi"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Logout"),
+              onTap: () {},
+            )
+          ],
+        ),
+      ),
+      body: Center(
+        child: Text(
+            "Hi " + _name + "\n(Client)",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold
+            )
+        ),
+      ),
+    );
+  }
+}
