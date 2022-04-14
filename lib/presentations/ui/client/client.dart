@@ -14,8 +14,6 @@ class _ClientState extends State<Client> {
   String notif = "10";
   String _name = "";
   String _email = "";
-  String _username = "";
-
 
   getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -94,24 +92,26 @@ class _ClientState extends State<Client> {
               ),
             ),
             ListTile(
-              title: Text("Test"),
+              title: Text("Home"),
               onTap: () {
-                Navigator.of(context).pushNamed('/test');
+                Navigator.of(context).pushNamed('/client');
               },
             ),
             ListTile(
-              title: const Text("Master Data"),
+              title: const Text("Pengaturan"),
               onTap: () {
-                Navigator.of(context).pushNamed('/profile');
+                Navigator.of(context).pushNamed('/settings');
               },
             ),
             ListTile(
-              title: Text("Riwayat Transaksi"),
+              title: Text("Laporan"),
               onTap: () {},
             ),
             ListTile(
               title: Text("Logout"),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/');
+              },
             )
           ],
         ),
