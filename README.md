@@ -1,0 +1,2 @@
+# gajiku
+Aplikasi GajiKU mobile
