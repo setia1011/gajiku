@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/presentations/ui/admin/admin.dart';
 import 'package:gajiku/presentations/ui/login/login.dart';
 import 'package:gajiku/presentations/ui/client/client.dart';
+import 'package:gajiku/presentations/ui/manager/manager.dart';
 
 import 'blocs/auth/auth_bloc.dart';
 import 'data/repositories/auth_repo.dart';
@@ -29,6 +30,7 @@ class Gajiku extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => Login(),
+            '/manager': (context) => Manager(),
             '/admin': (context) => Admin(),
             '/client': (context) => Client()
           },

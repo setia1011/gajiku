@@ -33,6 +33,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
           if (pref.getInt("group_id") == 1) {
             emit(AdminLoginSuccessState());
+          } else if (pref.getInt("group_id") == 2) {
+            emit(ManagerLoginSuccessState());
           } else {
             emit(ClientLoginSuccessState());
           }

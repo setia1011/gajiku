@@ -11,7 +11,7 @@ class Client extends StatefulWidget {
 
 class _ClientState extends State<Client> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String notif = "10";
+  String _notif = "10";
   String _name = "";
   String _email = "";
 
@@ -54,7 +54,7 @@ class _ClientState extends State<Client> {
                   onPressed: () {},
                   icon: const Icon(Icons.email, color: Colors.white)
               ),
-              notif == "0" ? Container() : Positioned(
+              _notif == "0" ? Container() : Positioned(
                 right: 13.0,
                 top: 10.0,
                 child: Stack(
@@ -68,7 +68,7 @@ class _ClientState extends State<Client> {
                       top: 3.0,
                       right: 6.0,
                       child: Text(
-                          notif,
+                          _notif,
                           style: TextStyle(color: Colors.white, fontSize: 11.0
                           )
                       ),

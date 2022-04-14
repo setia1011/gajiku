@@ -103,6 +103,8 @@ class _UserLoginState extends State<Login> {
             Navigator.pushNamed(context, '/client');
           } else if (state is AdminLoginSuccessState) {
             Navigator.pushNamed(context, '/admin');
+          } else if (state is ManagerLoginSuccessState) {
+            Navigator.pushNamed(context, '/manager');
           }
         },
         child: Center(

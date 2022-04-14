@@ -12,7 +12,7 @@ class Admin extends StatefulWidget {
 class _AdminState extends State<Admin> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String _name = "";
-  String notif = "9";
+  String _notif = "9";
 
   getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -51,7 +51,7 @@ class _AdminState extends State<Admin> {
                   onPressed: () {},
                   icon: const Icon(Icons.email, color: Colors.white)
               ),
-              notif == "0" ? Container() : Positioned(
+              _notif == "0" ? Container() : Positioned(
                 right: 13.0,
                 top: 10.0,
                 child: Stack(
@@ -65,7 +65,7 @@ class _AdminState extends State<Admin> {
                       top: 3.0,
                       right: 6.0,
                       child: Text(
-                          notif,
+                          _notif,
                           style: TextStyle(color: Colors.white, fontSize: 11.0
                           )
                       ),
