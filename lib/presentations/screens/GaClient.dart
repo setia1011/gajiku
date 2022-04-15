@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Manager extends StatefulWidget {
-  const Manager({Key? key}) : super(key: key);
+class GaClient extends StatefulWidget {
+  const GaClient({Key? key}) : super(key: key);
 
   @override
-  State<Manager> createState() => _ManagerState();
+  State<GaClient> createState() => _GaClientState();
 }
 
-class _ManagerState extends State<Manager> {
+class _GaClientState extends State<GaClient> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String _notif = "10";
   String _name = "";
@@ -28,6 +28,7 @@ class _ManagerState extends State<Manager> {
     super.initState();
     getPref();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +37,14 @@ class _ManagerState extends State<Manager> {
         title: const ClipRRect(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(0.0), topRight: Radius.circular(0.0)),
-          child: Text("Manager Page"),
+          child: Text("Client Page"),
         ),
         leading: Padding(
             padding: const EdgeInsets.only(left: 12),
             child: IconButton(
-                onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+                onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                 icon: const Icon(Icons.menu, size: 32, color: Colors.white))),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.green,
         elevation: 0,
         actions: [
           Stack(
@@ -85,7 +86,7 @@ class _ManagerState extends State<Manager> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.teal,
+                color: Colors.green,
               ),
               accountName: Text(_name),
               accountEmail: Text(_email),
@@ -95,11 +96,15 @@ class _ManagerState extends State<Manager> {
             ),
             ListTile(
               title: Text("Home"),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/client');
+              },
             ),
             ListTile(
               title: const Text("Pengaturan"),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/settings');
+              },
             ),
             ListTile(
               title: Text("Laporan"),
@@ -116,7 +121,7 @@ class _ManagerState extends State<Manager> {
       ),
       body: Center(
         child: Text(
-            "Hi " + _name + "\n(manager)",
+            "Hi " + _name + "\n(Client)",
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20.0,

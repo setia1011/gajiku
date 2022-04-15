@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/presentations/routes.dart';
 
-import 'blocs/auth/auth_bloc.dart';
-import 'data/repositories/auth_repo.dart';
-import 'data/repositories/userinfo_repo.dart';
+import 'bloc/GaAuthBloc.dart';
+import 'data/repositories/GaAuthRepo.dart';
+import 'data/repositories/GaUserInfoRepo.dart';
 
 import 'package:gajiku/presentations/screens/BankingSplash.dart';
 import 'package:gajiku/presentations/store/AppStore.dart';
@@ -38,9 +38,9 @@ class Gajiku extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => AuthBloc(
-                AuthRepo(),
-                UserInfoRepository()),
+            create: (context) => GaAuthBloc(
+                GaAuthRepo(),
+                GaUserInfoRepo()),
           ),
         ],
         child: MaterialApp(

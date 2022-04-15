@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gajiku/presentations/screens/GaSignUp.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/screens/BankingDashboard.dart';
 import 'package:gajiku/presentations/screens/BankingForgotPassword.dart';
@@ -9,27 +11,27 @@ import 'package:gajiku/presentations/utils/BankingColors.dart';
 import 'package:gajiku/presentations/utils/BankingStrings.dart';
 import 'package:gajiku/presentations/utils/BankingWidget.dart';
 
-import '../../blocs/auth/auth_bloc.dart';
-import '../../blocs/auth/auth_event.dart';
-import '../../blocs/auth/auth_state.dart';
+import 'package:gajiku/bloc/GaAuthBloc.dart';
+import 'package:gajiku/bloc/GaAuthEvent.dart';
+import 'package:gajiku/bloc/GaAuthState.dart';
 
-class BankingSignIn extends StatefulWidget {
+class GaSignIn extends StatefulWidget {
   static var tag = "/BankingSignIn";
 
   @override
-  _BankingSignInState createState() => _BankingSignInState();
+  _GaSignInState createState() => _GaSignInState();
 }
 
-class _BankingSignInState extends State<BankingSignIn> {
+class _GaSignInState extends State<GaSignIn> {
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
 
-  AuthBloc? authBloc;
+  GaAuthBloc? authBloc;
 
   @override
   void initState() {
     setStatusBarColor(appStore.isDarkModeOn ? black : white);
-    authBloc = BlocProvider.of<AuthBloc>(context);
+    authBloc = BlocProvider.of<GaAuthBloc>(context);
     super.initState();
   }
 
@@ -47,7 +49,7 @@ class _BankingSignInState extends State<BankingSignIn> {
         textAlign: TextAlign.center,
         style: primaryTextStyle(size: 16, color: Banking_TextColorSecondary),
       ).paddingBottom(16),
-      body: BlocListener<AuthBloc, AuthState>(
+      body: BlocListener<GaAuthBloc, GaAuthState>(
         listener: (context, state) {
           if (state is ClientLoginSuccessState) {
             Navigator.pushNamed(context, '/client');
@@ -94,9 +96,19 @@ class _BankingSignInState extends State<BankingSignIn> {
               16.height,
               Column(
                 children: [
-                  Text(
-                    Banking_lbl_Login_with_FaceID,
-                    style: primaryTextStyle(size: 16, color: Banking_TextColorSecondary),
+                  TextButton(
+                      onPressed: () {
+                        GaSignUp().launch(context);
+                      },
+                      style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size(50, 30),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          alignment: Alignment.topLeft),
+                      child: Text(
+                        Banking_lbl_Login_with_FaceID,
+                        style: primaryTextStyle(size: 16, color: Banking_blueColor),
+                      )
                   ),
                   16.height,
                 ],

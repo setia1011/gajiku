@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class AuthEvent extends Equatable {
+class GaAuthEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-class LoginStartEvent extends AuthEvent {}
+class LoginStartEvent extends GaAuthEvent {}
 
-class LoginButtonPressed extends AuthEvent {
+class LoginButtonPressed extends GaAuthEvent {
   final String username;
   final String password;
 

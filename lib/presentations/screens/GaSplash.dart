@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/screens/walk_through.dart';
+import 'package:gajiku/presentations/screens/GaWalkThrough.dart';
 import 'package:gajiku/presentations/utils/colors.dart';
 import 'package:gajiku/presentations/utils/contants.dart';
 import 'package:gajiku/presentations/utils/strings.dart';
 
-class Splash extends StatefulWidget {
+class GaSplash extends StatefulWidget {
   static String tag = '/BankingSplash';
 
   @override
-  _SplashState createState() => _SplashState();
+  _GaSplashState createState() => _GaSplashState();
 }
 
-class _SplashState extends State<Splash> {
+class _GaSplashState extends State<GaSplash> {
   void initState() {
     setStatusBarColor(Banking_palColor);
     super.initState();
@@ -29,7 +29,7 @@ class _SplashState extends State<Splash> {
     setState(
           () {
         // finish(context);
-        BankingWalkThrough().launch(context);
+        GaWalkThrough().launch(context);
       },
     );
   }

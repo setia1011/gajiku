@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/screens/BankingWalkThrough.dart';
+import 'package:gajiku/presentations/screens/GaWalkThrough.dart';
 import 'package:gajiku/presentations/utils/BankingColors.dart';
 import 'package:gajiku/presentations/utils/BankingContants.dart';
 import 'package:gajiku/presentations/utils/BankingStrings.dart';
@@ -30,7 +30,7 @@ class _BankingSplashState extends State<BankingSplash> {
     setState(
       () {
         // finish(context);
-        BankingWalkThrough().launch(context);
+        GaWalkThrough().launch(context);
       },
     );
   }

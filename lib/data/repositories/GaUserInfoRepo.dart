@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../api/api.dart';
 
 
-class UserInfoRepository {
+class GaUserInfoRepo {
   detail(String token) async {
     var res = await http.get(
         Uri.parse(BaseUrl.urlUserDetail),

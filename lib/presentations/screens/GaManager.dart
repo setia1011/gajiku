@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Admin extends StatefulWidget {
-  const Admin({Key? key}) : super(key: key);
+class GaManager extends StatefulWidget {
+  const GaManager({Key? key}) : super(key: key);
 
   @override
-  State<Admin> createState() => _AdminState();
+  State<GaManager> createState() => _GaManagerState();
 }
 
-class _AdminState extends State<Admin> {
+class _GaManagerState extends State<GaManager> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String _notif = "10";
   String _name = "";
@@ -28,7 +28,6 @@ class _AdminState extends State<Admin> {
     super.initState();
     getPref();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,14 +36,14 @@ class _AdminState extends State<Admin> {
         title: const ClipRRect(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(0.0), topRight: Radius.circular(0.0)),
-          child: Text("Admin Page"),
+          child: Text("Manager Page"),
         ),
         leading: Padding(
             padding: const EdgeInsets.only(left: 12),
             child: IconButton(
                 onPressed: () => _scaffoldKey.currentState!.openDrawer(),
                 icon: const Icon(Icons.menu, size: 32, color: Colors.white))),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.teal,
         elevation: 0,
         actions: [
           Stack(
@@ -86,7 +85,7 @@ class _AdminState extends State<Admin> {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.indigo,
+                color: Colors.teal,
               ),
               accountName: Text(_name),
               accountEmail: Text(_email),
@@ -117,7 +116,7 @@ class _AdminState extends State<Admin> {
       ),
       body: Center(
         child: Text(
-            "Hi " + _name + "\n(administrator)",
+            "Hi " + _name + "\n(manager)",
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20.0,

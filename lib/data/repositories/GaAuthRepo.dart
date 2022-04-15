@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../api/api.dart';
 
 
-class AuthRepo {
+class GaAuthRepo {
   login(String username, String password) async {
     Map data = {"username": username, "password": password};
     String body = json.encode(data);

@@ -1,5 +1,5 @@
 import 'package:gajiku/main.dart';
-import 'package:gajiku/presentations/screens/BankingSignIn.dart';
+import 'package:gajiku/presentations/screens/GaSignIn.dart';
 import 'package:gajiku/presentations/utils/BankingColors.dart';
 import 'package:gajiku/presentations/utils/BankingContants.dart';
 import 'package:gajiku/presentations/utils/BankingImages.dart';
@@ -9,12 +9,12 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class BankingWalkThrough extends StatefulWidget {
+class GaWalkThrough extends StatefulWidget {
   @override
-  _BankingWalkThroughState createState() => _BankingWalkThroughState();
+  _GaWalkThroughState createState() => _GaWalkThroughState();
 }
 
-class _BankingWalkThroughState extends State<BankingWalkThrough> {
+class _GaWalkThroughState extends State<GaWalkThrough> {
   int currentIndexPage = 0;
   int? pageLength;
 
@@ -106,7 +106,7 @@ class _BankingWalkThroughState extends State<BankingWalkThrough> {
                     textContent: Banking_lbl_Get_Started,
                     onPressed: () {
                       // finish(context);
-                      BankingSignIn().launch(context);
+                      GaSignIn().launch(context);
                     },
                   ),
                 ],

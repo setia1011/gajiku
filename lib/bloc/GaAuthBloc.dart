@@ -1,16 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gajiku/data/repositories/userinfo_repo.dart';
+import 'package:gajiku/data/repositories/GaUserInfoRepo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:gajiku/data/repositories/auth_repo.dart';
-import 'auth_event.dart';
-import 'auth_state.dart';
+import 'package:gajiku/data/repositories/GaAuthRepo.dart';
+import 'GaAuthEvent.dart';
+import 'GaAuthState.dart';
 
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthRepo repo;
-  UserInfoRepository userInfoRepo;
-  AuthBloc(this.repo, this.userInfoRepo): super(AuthInitial()) {
-    on<AuthEvent>((event, emit) async {
+class GaAuthBloc extends Bloc<GaAuthEvent, GaAuthState> {
+  GaAuthRepo repo;
+  GaUserInfoRepo userInfoRepo;
+  GaAuthBloc(this.repo, this.userInfoRepo): super(AuthInitial()) {
+    on<GaAuthEvent>((event, emit) async {
       var pref = await SharedPreferences.getInstance();
       if (event is LoginStartEvent) {
         emit(LoginInitState());
