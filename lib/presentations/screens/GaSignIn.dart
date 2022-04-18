@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gajiku/presentations/screens/GaAktivasi.dart';
 import 'package:gajiku/presentations/screens/GaSignUp.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/screens/BankingDashboard.dart';
@@ -22,11 +23,12 @@ class GaSignIn extends StatefulWidget {
   _GaSignInState createState() => _GaSignInState();
 }
 
-class _GaSignInState extends State<GaSignIn> {
+class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
-
   GaAuthBloc? authBloc;
+  late AnimationController animationController;
+  late Animation animation;
 
   @override
   void initState() {
@@ -35,14 +37,152 @@ class _GaSignInState extends State<GaSignIn> {
     super.initState();
   }
 
+  onChangeLevel() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+      reverseDuration: const Duration(seconds: 5),
+    );
+    animation = CurvedAnimation(parent: animationController, curve: Curves.decelerate);
+    animationController.reverse(from: 1.0);
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.dismissed) {
+        animationController.stop();
+        BlocProvider.of<GaAuthBloc>(context).add(LoginStartEvent());
+      }
+    });
+    animationController.addListener(() {
+      setState(() {});
+      // print(animation.value * 100);
+    });
+  }
+
   @override
   void dispose() {
-    //setStatusBarColor(Banking_palColor);
+    animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Error message
+    final blocErrorMessage = BlocBuilder<GaAuthBloc, GaAuthState>(
+      builder: (context, state) {
+        if (state is LoginErrorState) {
+          return AnimatedOpacity(
+            opacity: animation.value,
+            duration: const Duration(seconds: 0),
+            child: Column(
+              children: [
+                0.height,
+                Text(
+                    state.message,
+                    style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)
+                ),
+              ],
+            )
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+
+    final loginView = SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          const SizedBox(height: 100.0),
+          Text(Banking_lbl_SignIn, style: boldTextStyle(size: 30)),
+          25.height,
+          blocErrorMessage,
+          EditText(mController: _username, text: "Username", isPassword: false),
+          8.height,
+          EditText(mController: _password,text: "Password", isPassword: true, isSecure: true),
+          16.height,
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(Banking_lbl_Forgot, style: secondaryTextStyle(size: 16)).onTap(
+                  () {
+                BankingForgotPassword().launch(context);
+              },
+            ),
+          ),
+          16.height,
+          BankingButton(
+            textContent: Banking_lbl_SignIn,
+            onPressed: () {
+              setState(() {
+                onChangeLevel();
+              });
+              authBloc?.add(LoginButtonPressed(
+                  username: _username.text,
+                  password: _password.text
+              ));
+            },
+          ),
+          16.height,
+          Column(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    GaSignUp().launch(context);
+                  },
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size(50, 30),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      alignment: Alignment.topLeft),
+                  child: Text(
+                    Banking_lbl_Login_with_FaceID,
+                    style: primaryTextStyle(size: 16, color: Banking_blueColor),
+                  )
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    GaAktivasi().launch(context);
+                  },
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size(50, 30),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      alignment: Alignment.topLeft),
+                  child: Text(
+                    Banking_lbl_Aktivasi,
+                    style: primaryTextStyle(
+                        size: 16,
+                        color: Banking_blueColor),
+                  )
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    final blocBuilder2 = BlocBuilder<GaAuthBloc, GaAuthState>(
+      builder: (context, state) {
+        if (state is LoginLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is AuthInitial) {
+          return loginView;
+        } else if (state is LoginInitState) {
+          return loginView;
+        } else if (state is LoginErrorState) {
+          return loginView;
+        } else {
+          return Container();
+        }
+      },
+    );
+
     return Scaffold(
       bottomNavigationBar: Text(
         Banking_lbl_app_Name.toUpperCase(),
@@ -59,63 +199,7 @@ class _GaSignInState extends State<GaSignIn> {
             Navigator.pushNamed(context, '/manager');
           }
         },
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(height: 100.0),
-              Text(Banking_lbl_SignIn, style: boldTextStyle(size: 30)),
-              16.height,
-              EditText(mController: _username, text: "Username", isPassword: false),
-              8.height,
-              EditText(mController: _password,text: "Password", isPassword: true, isSecure: true),
-              16.height,
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(Banking_lbl_Forgot, style: secondaryTextStyle(size: 16)).onTap(
-                  () {
-                    BankingForgotPassword().launch(context);
-                  },
-                ),
-              ),
-              16.height,
-              BankingButton(
-                textContent: Banking_lbl_SignIn,
-                onPressed: () {
-                  authBloc?.add(LoginButtonPressed(
-                      username: _username.text,
-                      password: _password.text
-                  ));
-                  //finish(context);
-                  // BankingDashboard().launch(context);
-                },
-              ),
-              16.height,
-              Column(
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        GaSignUp().launch(context);
-                      },
-                      style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: Size(50, 30),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          alignment: Alignment.topLeft),
-                      child: Text(
-                        Banking_lbl_Login_with_FaceID,
-                        style: primaryTextStyle(size: 16, color: Banking_blueColor),
-                      )
-                  ),
-                  16.height,
-                ],
-              ),
-            ],
-          ),
-        ),
+        child: blocBuilder2,
       ),
     );
   }

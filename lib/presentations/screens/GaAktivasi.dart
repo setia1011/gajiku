@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gajiku/presentations/screens/GaAktivasi.dart';
+
+import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import 'package:gajiku/presentations/screens/GaSignUp.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/screens/BankingDashboard.dart';
 import 'package:gajiku/presentations/screens/BankingForgotPassword.dart';
@@ -15,20 +19,15 @@ import 'package:gajiku/bloc/GaAuthBloc.dart';
 import 'package:gajiku/bloc/GaAuthEvent.dart';
 import 'package:gajiku/bloc/GaAuthState.dart';
 
-import 'GaSignIn.dart';
-
-class GaSignUp extends StatefulWidget {
+class GaAktivasi extends StatefulWidget {
   static var tag = "/BankingSignIn";
 
   @override
-  _GaSignUpState createState() => _GaSignUpState();
+  _GaAktivasiState createState() => _GaAktivasiState();
 }
 
-class _GaSignUpState extends State<GaSignUp> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _name = TextEditingController();
-  TextEditingController _username = TextEditingController();
-  TextEditingController _password = TextEditingController();
+class _GaAktivasiState extends State<GaAktivasi> {
+  TextEditingController _acticode = TextEditingController();
 
   GaAuthBloc? authBloc;
 
@@ -55,6 +54,7 @@ class _GaSignUpState extends State<GaSignUp> {
       ).paddingBottom(16),
       body: BlocListener<GaAuthBloc, GaAuthState>(
         listener: (context, state) {
+          print(state);
           if (state is ClientLoginSuccessState) {
             Navigator.pushNamed(context, '/client');
           } else if (state is AdminLoginSuccessState) {
@@ -70,39 +70,37 @@ class _GaSignUpState extends State<GaSignUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(height: 100.0),
-              Text("Daftar", style: boldTextStyle(size: 30)),
+              const SizedBox(height: 100.0),
+              Text("Aktivasi", style: boldTextStyle(size: 30)),
               16.height,
               TextField(
-                controller: _email,
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: '#-#-#-#-#-#',
+                    filter: { "#": RegExp(r'[0-9]') },
+                    type: MaskAutoCompletionType.lazy,
+                  )
+                ],
                 decoration: const InputDecoration(
-                    labelText: 'Email'
+                  hintText: '0-0-0-0-0-0',
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      //  when the TextFormField in unfocused
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      //  when the TextFormField in focused
+                    ) ,
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black45)
+                    )
                 ),
+                style: TextStyle(fontSize: 30.0),
               ),
-              TextField(
-                controller: _name,
-                decoration: const InputDecoration(
-                    labelText: 'Name'
-                ),
-              ),
-              TextField(
-                controller: _username,
-                decoration: const InputDecoration(
-                    labelText: 'Username'
-                ),
-              ),
-              TextField(
-                controller: _password,
-                decoration: const InputDecoration(
-                    labelText: 'Password'
-                ),
-                obscureText: true,
-              ),
-              20.height,
+              16.height,
               BankingButton(
-                textContent: "Daftar",
+                textContent: "Kirim",
                 onPressed: () {
-
                 },
               ),
               16.height,
@@ -110,7 +108,7 @@ class _GaSignUpState extends State<GaSignUp> {
                 children: [
                   TextButton(
                       onPressed: () {
-                        GaSignIn().launch(context);
+                        GaSignUp().launch(context);
                       },
                       style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
@@ -124,26 +122,6 @@ class _GaSignUpState extends State<GaSignUp> {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        GaAktivasi().launch(context);
-                      },
-                      style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: Size(50, 30),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          alignment: Alignment.topLeft),
-                      child: Text(
-                        Banking_lbl_Aktivasi,
-                        style: primaryTextStyle(
-                            size: 16,
-                            color: Banking_blueColor),
-                      )
-                  ),
-                ],
-              )
             ],
           ),
         ),

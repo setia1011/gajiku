@@ -20,6 +20,6 @@ class ManagerLoginSuccessState extends GaAuthState {}
 class SuperLoginSuccessState extends GaAuthState {}
 
 class LoginErrorState extends GaAuthState {
-  final String message;
+  String message;
   LoginErrorState({required this.message});
 }
