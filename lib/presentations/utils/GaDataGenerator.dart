@@ -114,6 +114,48 @@ List<BankingPaymentModel> bankingPaymentList() {
   return list;
 }
 
+List<BankingPaymentModel> gajikuMasterGajiList() {
+  List<BankingPaymentModel> list = [];
+
+  var list1 = BankingPaymentModel(title: "Pangkat", img: Banking_ic_Mobile, color: Banking_Primary);
+  list.add(list1);
+
+  var list2 = BankingPaymentModel(title: "Golongan", img: Banking_ic_Mobile);
+  list.add(list2);
+
+  var list3 = BankingPaymentModel(title: "Jabatan", img: Banking_ic_Mobile, color: Banking_blueColor);
+  list.add(list3);
+
+  var list4 = BankingPaymentModel(title: "Grade", img: Banking_ic_Mobile, color: Banking_palColor);
+  list.add(list4);
+
+  var list5 = BankingPaymentModel(title: "Status Kawin", img: Banking_ic_Mobile, color: Banking_palColor);
+  list.add(list5);
+
+  var list6 = BankingPaymentModel(title: "Perjadin", img: Banking_ic_Mobile, color: Banking_palColor);
+  list.add(list6);
+
+  return list;
+}
+
+List<BankingPaymentModel> gajikuLaporanGajiList() {
+  List<BankingPaymentModel> list = [];
+
+  var list1 = BankingPaymentModel(title: "Laporan Gaji", img: Banking_ic_Mobile, color: Banking_Primary);
+  list.add(list1);
+
+  var list2 = BankingPaymentModel(title: "Laporan Kehadiran", img: Banking_ic_Mobile);
+  list.add(list2);
+
+  var list3 = BankingPaymentModel(title: "Laporan Uang Makan", img: Banking_ic_Mobile, color: Banking_blueColor);
+  list.add(list3);
+
+  var list4 = BankingPaymentModel(title: "Laporan Perjadin", img: Banking_ic_Mobile, color: Banking_palColor);
+  list.add(list4);
+
+  return list;
+}
+
 List<BankingPaymentModel> bankingPaymentDetailList() {
   List<BankingPaymentModel> list = [];
 
