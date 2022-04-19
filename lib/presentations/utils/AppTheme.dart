@@ -1,4 +1,4 @@
-import 'package:gajiku/presentations/utils/BankingColors.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';

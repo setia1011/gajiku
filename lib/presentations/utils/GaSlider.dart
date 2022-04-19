@@ -3,13 +3,13 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/model/BankingModel.dart';
+import 'package:gajiku/presentations/model/GaModel.dart';
 
-import 'BankingColors.dart';
-import 'BankingContants.dart';
-import 'BankingDataGenerator.dart';
-import 'BankingImages.dart';
-import 'BankingStrings.dart';
+import 'GaColors.dart';
+import 'GaContants.dart';
+import 'GaDataGenerator.dart';
+import 'GaImages.dart';
+import 'GaStrings.dart';
 
 class BankingSliderWidget extends StatefulWidget {
   static String tag = '/BankingSlider';

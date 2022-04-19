@@ -5,18 +5,14 @@ import 'package:gajiku/bloc/GaRegBloc.dart';
 import 'package:gajiku/data/repositories/GaActiRepo.dart';
 import 'package:gajiku/data/repositories/GaRegRepo.dart';
 import 'package:gajiku/presentations/routes.dart';
-
 import 'bloc/GaAuthBloc.dart';
 import 'data/repositories/GaAuthRepo.dart';
 import 'data/repositories/GaUserInfoRepo.dart';
-
-import 'package:gajiku/presentations/screens/BankingSplash.dart';
 import 'package:gajiku/presentations/store/AppStore.dart';
 import 'package:gajiku/presentations/utils/AppTheme.dart';
-import 'package:gajiku/presentations/utils/BankingContants.dart';
-import 'package:gajiku/presentations/utils/BankingDataGenerator.dart';
-import 'package:gajiku/presentations/utils/BankingStrings.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:gajiku/presentations/utils/GaContants.dart';
+import 'package:gajiku/presentations/utils/GaDataGenerator.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 AppStore appStore = AppStore();

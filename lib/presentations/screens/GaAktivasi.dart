@@ -1,26 +1,15 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/bloc/GaActiBloc.dart';
 import 'package:gajiku/bloc/GaActiEvent.dart';
 import 'package:gajiku/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/services.dart';
 import 'package:gajiku/presentations/screens/GaSignIn.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
-import 'package:gajiku/presentations/screens/GaSignUp.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/screens/BankingDashboard.dart';
-import 'package:gajiku/presentations/screens/BankingForgotPassword.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingStrings.dart';
-import 'package:gajiku/presentations/utils/BankingWidget.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
+import 'package:gajiku/presentations/utils/GaWidget.dart';
 
-import 'package:gajiku/bloc/GaAuthBloc.dart';
-import 'package:gajiku/bloc/GaAuthEvent.dart';
-import 'package:gajiku/bloc/GaAuthState.dart';
 
 import '../../bloc/GaActiState.dart';
 

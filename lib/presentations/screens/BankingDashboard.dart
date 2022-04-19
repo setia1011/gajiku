@@ -4,10 +4,10 @@ import 'package:gajiku/presentations/screens/BankingMenu.dart';
 import 'package:gajiku/presentations/screens/BankingPayment.dart';
 import 'package:gajiku/presentations/screens/BankingSaving.dart';
 import 'package:gajiku/presentations/screens/BankingTransfer.dart';
-import 'package:gajiku/presentations/utils/BankingBottomNavigationBar.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingImages.dart';
-import 'package:gajiku/presentations/utils/BankingStrings.dart';
+import 'package:gajiku/presentations/utils/GaBottomNavigationBar.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaImages.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class BankingDashboard extends StatefulWidget {

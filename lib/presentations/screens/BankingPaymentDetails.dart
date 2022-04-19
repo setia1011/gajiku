@@ -1,12 +1,12 @@
 import 'package:gajiku/main.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/model/BankingModel.dart';
+import 'package:gajiku/presentations/model/GaModel.dart';
 import 'package:gajiku/presentations/screens/BankingPayInvoice.dart';
 import 'package:gajiku/presentations/screens/BankingPaymentHistory.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingContants.dart';
-import 'package:gajiku/presentations/utils/BankingDataGenerator.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaContants.dart';
+import 'package:gajiku/presentations/utils/GaDataGenerator.dart';
 
 // ignore: must_be_immutable
 class BankingPaymentDetails extends StatefulWidget {

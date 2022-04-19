@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/screens/GaWalkThrough.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingContants.dart';
-import 'package:gajiku/presentations/utils/BankingStrings.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaContants.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
 
 class BankingSplash extends StatefulWidget {
   static String tag = '/BankingSplash';

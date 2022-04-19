@@ -1,8 +1,8 @@
 import 'package:gajiku/main.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingContants.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaContants.dart';
 
 // ignore: must_be_immutable
 class BankingButton extends StatefulWidget {

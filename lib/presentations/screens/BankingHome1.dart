@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/model/BankingModel.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingContants.dart';
-import 'package:gajiku/presentations/utils/BankingDataGenerator.dart';
-import 'package:gajiku/presentations/utils/BankingImages.dart';
-import 'package:gajiku/presentations/utils/BankingWidget.dart';
+import 'package:gajiku/presentations/model/GaModel.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaContants.dart';
+import 'package:gajiku/presentations/utils/GaDataGenerator.dart';
+import 'package:gajiku/presentations/utils/GaImages.dart';
+import 'package:gajiku/presentations/utils/GaWidget.dart';
 
 class BankingHome1 extends StatefulWidget {
   static String tag = '/BankingHome1';

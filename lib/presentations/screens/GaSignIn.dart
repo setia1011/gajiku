@@ -8,9 +8,9 @@ import 'package:gajiku/presentations/screens/GaSignUp.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/screens/BankingDashboard.dart';
 import 'package:gajiku/presentations/screens/BankingForgotPassword.dart';
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingStrings.dart';
-import 'package:gajiku/presentations/utils/BankingWidget.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
+import 'package:gajiku/presentations/utils/GaWidget.dart';
 
 import 'package:gajiku/bloc/GaAuthBloc.dart';
 import 'package:gajiku/bloc/GaAuthEvent.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:gajiku/presentations/model/BankingModel.dart';
+import 'package:gajiku/presentations/model/GaModel.dart';
 import 'package:gajiku/presentations/screens/BankingInvoiceDetail.dart';
 
-import 'package:gajiku/presentations/utils/BankingColors.dart';
-import 'package:gajiku/presentations/utils/BankingContants.dart';
-import 'package:gajiku/presentations/utils/BankingStrings.dart';
-import 'package:gajiku/presentations/utils/BankingWidget.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaContants.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
+import 'package:gajiku/presentations/utils/GaWidget.dart';
 
 class BankingPaymentInvoice extends StatefulWidget {
   static var tag = "/BankingPaymentInvoice";
