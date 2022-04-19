@@ -26,6 +26,8 @@ class GaRegBloc extends Bloc<GaRegEvent, GaRegState> {
           } else {
             emit(RegErrorState(message: parsed["detail"].toString()));
           }
+        } else {
+          emit(RegErrorState(message: "Terjadi kesalahan"));
         }
       } on Exception catch(e) {
         emit(RegErrorState(message: "Terjadi kesalahan"));
