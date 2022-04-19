@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gajiku/bloc/GaRegBloc.dart';
+import 'package:gajiku/data/repositories/GaRegRepo.dart';
 import 'package:gajiku/presentations/routes.dart';
 
 import 'bloc/GaAuthBloc.dart';
@@ -42,6 +44,11 @@ class Gajiku extends StatelessWidget {
                 GaAuthRepo(),
                 GaUserInfoRepo()),
           ),
+          BlocProvider(
+            create: (context) => GaRegBloc(
+              GaRegRepo()
+            ),
+          )
         ],
         child: MaterialApp(
           title: '$Banking_lbl_app_Name${!isMobile ? ' ${platformName()}' : ''}',

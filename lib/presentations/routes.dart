@@ -17,5 +17,5 @@ var customRoutes = <String, WidgetBuilder>{
   '/dashboard': (context) => BankingDashboard(),
   '/daftar': (context) => GaSignUp(),
   '/login': (context) => GaSignIn(),
-  'aktivasi': (context) => GaAktivasi()
+  '/aktivasi': (context) => GaAktivasi()
 };

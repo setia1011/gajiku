@@ -3,4 +3,6 @@ class BaseUrl {
 
   static String urlLogin = url + "user/login/";
   static String urlUserDetail = url + "user/detail/";
+  static String urlRegister = url + "user/register/";
+  static String urlActivation = url + "user/activation/";
 }

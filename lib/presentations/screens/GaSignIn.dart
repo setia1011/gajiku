@@ -118,10 +118,12 @@ class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
               setState(() {
                 onChangeLevel();
               });
-              authBloc?.add(LoginButtonPressed(
-                  username: _username.text,
-                  password: _password.text
-              ));
+              if (_username.text != "" || _password.text != "") {
+                authBloc?.add(LoginButtonPressed(
+                    username: _username.text,
+                    password: _password.text
+                ));
+              }
             },
           ),
           16.height,
