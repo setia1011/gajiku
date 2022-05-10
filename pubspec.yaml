@@ -37,10 +37,11 @@ dependencies:
   http:
   flutter_bloc:
   shared_preferences:
+  streaming_shared_preferences: ^2.0.0
   equatable:
   shimmer:
   nb_utils:
-  google_fonts:
+  google_fonts: ^2.3.2
   flutter_svg:
   dots_indicator:
   mobx:
@@ -48,6 +49,7 @@ dependencies:
   flutter_vector_icons:
   intl:
   mask_text_input_formatter: ^2.3.0
+  flutter_typeahead: ^3.2.5
 
 dev_dependencies:
   flutter_test:

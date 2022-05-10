@@ -24,8 +24,8 @@ class GaSignIn extends StatefulWidget {
 }
 
 class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
-  TextEditingController _username = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   GaAuthBloc? authBloc;
   late AnimationController animationController;
   late Animation animation;
@@ -153,7 +153,7 @@ class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
                   },
                   style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
-                      minimumSize: Size(50, 30),
+                      minimumSize: const Size(50, 30),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       alignment: Alignment.topLeft),
                   child: Text(

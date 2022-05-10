@@ -35,6 +35,11 @@ class GaAuthBloc extends Bloc<GaAuthEvent, GaAuthState> {
             pref.setString("username", userInfo['username']);
             pref.setString("email", userInfo['email']);
             pref.setString("name", userInfo['name']);
+            pref.setInt("id_type", userInfo['id_type']);
+            pref.setString("id_type_name", userInfo['ref_id_type']['id_type']);
+            pref.setString("id_number", userInfo['id_number']);
+            pref.setString("phone", userInfo['phone']);
+            pref.setString("address", userInfo['address']);
             pref.setString("status", userInfo['status']);
             pref.setInt("group_id", userInfo['group_id']);
 

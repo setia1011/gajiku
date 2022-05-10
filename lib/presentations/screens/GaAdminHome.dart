@@ -13,14 +13,14 @@ import 'package:gajiku/presentations/utils/GaWidget.dart';
 
 import 'BankingPaymentDetails.dart';
 
-class GaHome1 extends StatefulWidget {
+class GaAdminHome extends StatefulWidget {
   static String tag = '/BankingHome1';
 
   @override
-  GaHome1State createState() => GaHome1State();
+  GaAdminHomeState createState() => GaAdminHomeState();
 }
 
-class GaHome1State extends State<GaHome1> {
+class GaAdminHomeState extends State<GaAdminHome> {
   int currentIndexPage = 0;
   int? pageLength;
 
@@ -85,7 +85,7 @@ class GaHome1State extends State<GaHome1> {
                   children: [
                     Container(
                       height: 250,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topLeft,
@@ -122,7 +122,7 @@ class GaHome1State extends State<GaHome1> {
                             child: DotsIndicator(
                               dotsCount: 3,
                               position: currentIndexPage.toDouble(),
-                              decorator: DotsDecorator(
+                              decorator: const DotsDecorator(
                                 size: Size.square(8.0),
                                 activeSize: Size.square(8.0),
                                 color: Banking_view_color,

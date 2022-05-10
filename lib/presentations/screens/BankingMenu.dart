@@ -33,7 +33,13 @@ class _BankingMenuState extends State<BankingMenu> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               10.height,
-              Text(Banking_lbl_Menu, style: boldTextStyle(size: 32)),
+              const Text(
+                  Banking_lbl_Menu,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30
+                  )
+              ),
               16.height,
               Container(
                 padding: EdgeInsets.all(8),
@@ -51,7 +57,7 @@ class _BankingMenuState extends State<BankingMenu> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         5.height,
-                        Text("Laura Smith", style: boldTextStyle(size: 18)),
+                        Text("Setiadi", style: boldTextStyle(size: 18)),
                         5.height,
                         Text("123 456 789", style: primaryTextStyle(color: Banking_TextColorSecondary)),
                         5.height,

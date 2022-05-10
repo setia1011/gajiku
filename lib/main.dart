@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gajiku/bloc/GaActiBloc.dart';
+import 'package:gajiku/bloc/GaProfileBloc.dart';
 import 'package:gajiku/bloc/GaRegBloc.dart';
 import 'package:gajiku/data/repositories/GaActiRepo.dart';
 import 'package:gajiku/data/repositories/GaRegRepo.dart';
 import 'package:gajiku/presentations/routes.dart';
 import 'bloc/GaAuthBloc.dart';
 import 'data/repositories/GaAuthRepo.dart';
+import 'data/repositories/GaProfileRepo.dart';
 import 'data/repositories/GaUserInfoRepo.dart';
 import 'package:gajiku/presentations/store/AppStore.dart';
 import 'package:gajiku/presentations/utils/AppTheme.dart';
@@ -40,7 +42,8 @@ class Gajiku extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => GaAuthBloc(GaAuthRepo(), GaUserInfoRepo())),
           BlocProvider(create: (context) => GaRegBloc(GaRegRepo())),
-          BlocProvider(create: (context) => GaActiBloc(GaActiRepo()))
+          BlocProvider(create: (context) => GaActiBloc(GaActiRepo())),
+          BlocProvider(create: (context) => GaProfileBloc(GaProfileRepo(), GaUserInfoRepo()))
         ],
         child: MaterialApp(
           title: '$Banking_lbl_app_Name${!isMobile ? ' ${platformName()}' : ''}',

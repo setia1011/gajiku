@@ -1,0 +1,160 @@
+import 'dart:ui';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gajiku/bloc/GaProfileBloc.dart';
+import 'package:gajiku/bloc/GaProfileEvent.dart';
+import 'package:gajiku/main.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
+import 'package:gajiku/presentations/utils/GaWidget.dart';
+import 'package:gajiku/data/repositories/GaRefIdType.dart';
+
+import 'GaProfile.dart';
+
+
+class GaProfileUpdate extends StatefulWidget {
+  const GaProfileUpdate({Key? key}) : super(key: key);
+
+  @override
+  _GaProfileUpdateState createState() => _GaProfileUpdateState();
+}
+
+class _GaProfileUpdateState extends State<GaProfileUpdate> {
+  late SharedPreferences prefs;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  int idType = 0;
+  TextEditingController idNumberController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
+  final TextEditingController _typeAheadController = TextEditingController();
+
+  GaProfileBloc? gaProfileBloc;
+
+  getPref() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs = _prefs;
+      emailController.text = _prefs.getString("email").toString();
+      nameController.text = _prefs.getString("name").toString();
+      idNumberController.text = _prefs.getString("id_number").toString();
+      phoneController.text = _prefs.getString("phone").toString();
+      addressController.text = _prefs.getString("address").toString();
+      _typeAheadController.text = _prefs.getString("id_type_name").toString();
+      idType = _prefs.getInt("id_type")!;
+    });
+  }
+
+  @override
+  void initState() {
+    gaProfileBloc = BlocProvider.of<GaProfileBloc>(context);
+    getPref();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: Text(
+        Banking_lbl_app_Name.toUpperCase(),
+        textAlign: TextAlign.center,
+        style: primaryTextStyle(color: Banking_TextColorSecondary),
+      ).paddingBottom(16),
+      body: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  30.height,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(
+                        Icons.chevron_left,
+                        size: 25,
+                        color: appStore.isDarkModeOn ? white : Banking_blackColor,
+                      ).onTap(
+                            () {
+                          finish(context);
+                        },
+                      ),
+                      20.height,
+                      Text('Update\nProfile', style: boldTextStyle(size: 32)),
+                    ],
+                  ),
+                  20.height,
+                  EditText(text: 'Email', mController: emailController,  isSecure: false, isPassword: false),
+                  16.height,
+                  EditText(text: 'Name', mController: nameController, isSecure: false, isPassword: false),
+                  16.height,
+                  TypeAheadFormField(
+                      textFieldConfiguration: TextFieldConfiguration(
+                          autofocus: false,
+                          style: const TextStyle(
+                              fontSize: 18.0
+                          ),
+                          controller: _typeAheadController
+                      ),
+                      onSuggestionSelected: (Map<String, String> suggestion) {
+                        _typeAheadController.text = suggestion['id_type']?.toUpperCase() as String;
+                        idType = suggestion['id'].toInt();
+                      },
+                      itemBuilder: (context, Map<String, String> suggestion) {
+                        return ListTile(
+                          title: Text('${suggestion['id_type']?.toUpperCase()}'),
+                        );
+                      },
+                      suggestionsCallback: (pattern) async {
+                        return await BackendService.getSuggestions(pattern);
+                      }
+                  ),
+                  // EditText(text: 'ID Type', mController: idTypeController, isSecure: false, isPassword: false),
+                  16.height,
+                  EditText(text: 'ID Number', mController: idNumberController, isSecure: false, isPassword: false),
+                  16.height,
+                  EditText(text: 'Phone Number', mController: phoneController, isSecure: false, isPassword: false),
+                  16.height,
+                  EditText(text: 'Address', mController: addressController, isSecure: false, isPassword: false),
+                  16.height,
+                  40.height,
+                  BankingButton(
+                    textContent: Banking_lbl_Confirm,
+                    onPressed: () {
+                      if (idType != 0 ||
+                          emailController.text != "" ||
+                          nameController.text != "" ||
+                          idNumberController.text != "" ||
+                          phoneController.text != "" ||
+                          addressController.text != "") {
+                        gaProfileBloc?.add(
+                            UpdateButtonPressedEvent(
+                                email: emailController.text,
+                                name: nameController.text,
+                                idType: idType,
+                                idNumber: idNumberController.text.toInt(),
+                                phone: phoneController.text,
+                                address: addressController.text
+                            )
+                        );
+                      }
+                      // GaProfile().launch(context);
+                      // toasty(context, 'Berhasil update data profile');
+                      finish(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

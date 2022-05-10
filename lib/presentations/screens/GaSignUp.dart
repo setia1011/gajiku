@@ -20,10 +20,10 @@ class GaSignUp extends StatefulWidget {
 }
 
 class _GaSignUpState extends State<GaSignUp> with TickerProviderStateMixin {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _name = TextEditingController();
-  TextEditingController _username = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   GaRegBloc? regBloc;
 
@@ -89,7 +89,7 @@ class _GaSignUpState extends State<GaSignUp> with TickerProviderStateMixin {
     );
 
     final regView = SingleChildScrollView(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
