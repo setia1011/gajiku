@@ -24,7 +24,7 @@ class _BankingPaymentDetailsState extends State<BankingPaymentDetails> {
   @override
   void initState() {
     super.initState();
-    mList = bankingPaymentDetailList();
+    mList = clientProjectList();
   }
 
   @override

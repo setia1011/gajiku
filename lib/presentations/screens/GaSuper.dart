@@ -21,7 +21,7 @@ class _GaSuperState extends State<GaSuper> {
 
   var selectedIndex = 0;
   var pages = [
-    GaSuperHome(),
+    GaAdminHome(),
     BankingTransfer(),
     BankingPayment(),
     BankingSaving(),

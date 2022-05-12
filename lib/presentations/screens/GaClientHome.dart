@@ -1,24 +1,21 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/model/GaModel.dart';
 import 'package:gajiku/presentations/utils/GaColors.dart';
-import 'package:gajiku/presentations/utils/GaContants.dart';
 import 'package:gajiku/presentations/utils/GaDataGenerator.dart';
 import 'package:gajiku/presentations/utils/GaImages.dart';
 import 'package:gajiku/presentations/utils/GaWidget.dart';
 
 import 'BankingPaymentDetails.dart';
 
-class GaAdminHome extends StatefulWidget {
+class GaClientHome extends StatefulWidget {
   @override
-  GaAdminHomeState createState() => GaAdminHomeState();
+  GaClientHomeState createState() => GaClientHomeState();
 }
 
-class GaAdminHomeState extends State<GaAdminHome> {
+class GaClientHomeState extends State<GaClientHome> {
   late SharedPreferences prefs;
   String name = "";
   String groupName = "";
@@ -35,6 +32,7 @@ class GaAdminHomeState extends State<GaAdminHome> {
   int currentIndexPage = 0;
   int? pageLength;
 
+  late List<BankingPaymentModel> clientGajiList;
   late List<BankingPaymentModel> laporanGajiList;
   late List<BankingPaymentModel> masterGajiList;
   late List<BankingHomeModel> mList1;
@@ -47,6 +45,7 @@ class GaAdminHomeState extends State<GaAdminHome> {
     getPrefs();
     currentIndexPage = 0;
     pageLength = 3;
+    clientGajiList = gajikuClientGajiList();
     masterGajiList = gajikuMasterGajiList();
     laporanGajiList = gajikuLaporanGajiList();
     mList1 = bankingHomeList1();
@@ -66,13 +65,13 @@ class GaAdminHomeState extends State<GaAdminHome> {
               titleSpacing: 0,
               automaticallyImplyLeading: false,
               backgroundColor: innerBoxIsScrolled ? Banking_Primary : context.cardColor,
-              actionsIconTheme: IconThemeData(opacity: 0.0),
+              actionsIconTheme: const IconThemeData(opacity: 0.0),
               title: Container(
-                padding: EdgeInsets.fromLTRB(16, 42, 16, 32),
-                margin: EdgeInsets.only(bottom: 8, top: 8),
+                padding: const EdgeInsets.fromLTRB(16, 42, 16, 32),
+                margin: const EdgeInsets.only(bottom: 8, top: 8),
                 child: Row(
                   children: [
-                    CircleAvatar(backgroundImage: AssetImage(Banking_ic_user1), radius: 24),
+                    const CircleAvatar(backgroundImage: AssetImage(Banking_ic_user1), radius: 24),
                     10.width,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +87,7 @@ class GaAdminHomeState extends State<GaAdminHome> {
                         ),
                       ],
                     ).expand(),
-                    Icon(Icons.notifications, size: 30, color: Banking_whitePureColor)
+                    const Icon(Icons.notifications, size: 30, color: Banking_whitePureColor)
                   ],
                 ),
               ),
@@ -101,13 +100,13 @@ class GaAdminHomeState extends State<GaAdminHome> {
                         gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topLeft,
-                          colors: <Color>[Banking_Primary, Banking_palColor],
+                          colors: <Color>[Banking_blueColor, Banking_palColor],
                         ),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(16, 80, 16, 8),
-                      padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                      margin: const EdgeInsets.fromLTRB(16, 80, 16, 8),
+                      padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                       decoration: boxDecorationWithRoundedCorners(
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: defaultBoxShadow(),
@@ -119,9 +118,9 @@ class GaAdminHomeState extends State<GaAdminHome> {
                             height: 130,
                             child: PageView(
                               children: [
-                                TopCard(name: "Project", acno: "1234567899", bal: "\$12,500"),
-                                TopCard(name: "Adam Johnson", acno: "9874563210", bal: "\$18,000"),
-                                TopCard(name: "Ana Willson", acno: "5821479630", bal: "\$12,500"),
+                                ProjectCard(name: "Project 1", projectName: "Global Institute", responsible: "Miftah"),
+                                ProjectCard(name: "Project 2", projectName: "Sekolah Tinggi Ilmu Pelayaran", responsible: "Selan Lingam"),
+                                ProjectCard(name: "Project 3", projectName: "Kelas IDEA", responsible: "Setiadi"),
                               ],
                               onPageChanged: (value) {
                                 setState(() => currentIndexPage = value);
@@ -155,15 +154,15 @@ class GaAdminHomeState extends State<GaAdminHome> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.payment, color: Banking_TextColorWhite, size: 24),
+                                    const Icon(Icons.add_circle, color: Banking_TextColorWhite, size: 24),
                                     10.width,
-                                    Text('Payment', style: boldTextStyle(color: Banking_TextColorWhite)),
+                                    Text('New Project', style: boldTextStyle(color: Banking_TextColorWhite)),
                                   ],
                                 ),
                               ).expand(),
                               10.width,
                               Container(
-                                padding: EdgeInsets.only(top: 8, bottom: 8),
+                                padding: const EdgeInsets.only(top: 8, bottom: 8),
                                 decoration: boxDecorationWithRoundedCorners(
                                   backgroundColor: Banking_Primary,
                                   borderRadius: BorderRadius.circular(8),
@@ -171,9 +170,9 @@ class GaAdminHomeState extends State<GaAdminHome> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(Banking_ic_Transfer, color: Banking_TextColorWhite),
+                                    const Icon(Icons.add_circle, color: Banking_TextColorWhite, size: 24),
                                     10.width,
-                                    Text('Transfer', style: boldTextStyle(color: Banking_TextColorWhite)),
+                                    Text('Subscribe', style: boldTextStyle(color: Banking_TextColorWhite)),
                                   ],
                                 ),
                               ).expand(),
@@ -197,11 +196,60 @@ class GaAdminHomeState extends State<GaAdminHome> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text("Client", style: primaryTextStyle()),
+                    4.height,
+                    Text("Project & Subscribe", style: secondaryTextStyle()),
+                  ],
+                ),
+                GridView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: clientGajiList.length,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(left: 6, right: 6, top: 6, bottom: 6),
+                      decoration: boxDecorationWithShadow(
+                        backgroundColor: context.cardColor,
+                        boxShadow: defaultBoxShadow(),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(clientGajiList[index].img!, height: 35, width: 35, color: clientGajiList[index].color),
+                          15.height,
+                          Text(
+                            clientGajiList[index].title!,
+                            style: primaryTextStyle(),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ).onTap(
+                          () {
+                        BankingPaymentDetails(headerText: clientGajiList[index].title).launch(context);
+                      },
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 0.8,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                  ),
+                ),
+                16.height,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text("Master", style: primaryTextStyle()),
                     4.height,
                     Text("Pengaturan data gaji", style: secondaryTextStyle()),
                   ],
                 ),
+                Divider(),
                 GridView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: masterGajiList.length,

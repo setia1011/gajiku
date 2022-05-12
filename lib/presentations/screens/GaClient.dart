@@ -1,132 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gajiku/presentations/screens/BankingPayment.dart';
+import 'package:gajiku/presentations/screens/BankingSaving.dart';
+import 'package:gajiku/presentations/screens/BankingTransfer.dart';
+import 'package:gajiku/presentations/screens/GaProfile.dart';
+import 'package:gajiku/presentations/screens/GaClientHome.dart';
+import 'package:gajiku/presentations/utils/GaBottomNavigationBar.dart';
+import 'package:gajiku/presentations/utils/GaColors.dart';
+import 'package:gajiku/presentations/utils/GaImages.dart';
+import 'package:gajiku/presentations/utils/GaStrings.dart';
+import 'package:nb_utils/nb_utils.dart';
 
+import 'GaAdminHome.dart';
 
 class GaClient extends StatefulWidget {
 
   @override
-  State<GaClient> createState() => _GaClientState();
+  _GaClientState createState() => _GaClientState();
 }
 
 class _GaClientState extends State<GaClient> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String _notif = "10";
-  String _name = "";
-  String _email = "";
 
-  getPref() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _email = prefs.getString("email")!;
-      _name = prefs.getString("name")!;
-    });
-  }
+  var selectedIndex = 0;
+  var pages = [
+    GaClientHome(),
+    BankingTransfer(),
+    BankingPayment(),
+    BankingSaving(),
+    GaProfile(),
+  ];
 
   @override
   void initState() {
     super.initState();
-    getPref();
+    selectedIndex = 0;
+  }
+
+  @override
+  void dispose() {
+    setStatusBarColor(white);
+    super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: const ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(0.0), topRight: Radius.circular(0.0)),
-          child: Text("Client Page"),
-        ),
-        leading: Padding(
-            padding: const EdgeInsets.only(left: 12),
-            child: IconButton(
-                onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                icon: const Icon(Icons.menu, size: 32, color: Colors.white))),
-        backgroundColor: Colors.green,
-        elevation: 0,
-        actions: [
-          Stack(
-            children: [
-              IconButton(
-                  padding: const EdgeInsets.only(right: 15.0, top: 15.0),
-                  onPressed: () {},
-                  icon: const Icon(Icons.email, color: Colors.white)
-              ),
-              _notif == "0" ? Container() : Positioned(
-                right: 13.0,
-                top: 10.0,
-                child: Stack(
-                  children: [
-                    Icon(
-                        Icons.brightness_1,
-                        size: 20.0,
-                        color: Colors.redAccent
-                    ),
-                    Positioned(
-                      top: 3.0,
-                      right: 6.0,
-                      child: Text(
-                          _notif,
-                          style: TextStyle(color: Colors.white, fontSize: 11.0
-                          )
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          )
+      bottomNavigationBar: BankingBottomNavigationBar(
+        selectedItemColor: Banking_Primary,
+        unselectedItemColor: Banking_greyColor.withOpacity(0.5),
+        items: const <BankingBottomNavigationBarItem>[
+          BankingBottomNavigationBarItem(icon: Banking_ic_Home, title: Text(Banking_lbl_Home)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Transfer, title: Text(Banking_lbl_Transfer)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Payment, title: Text(Banking_lbl_Payment)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Saving, title: Text(Banking_lbl_Saving)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Menu, title: Text(Banking_lbl_Menu)),
         ],
+        currentIndex: selectedIndex,
+        unselectedIconTheme: IconThemeData(color: Banking_greyColor.withOpacity(0.5), size: 28),
+        selectedIconTheme: const IconThemeData(color: Banking_Primary, size: 28),
+        onTap: _onItemTapped,
+        type: BankingBottomNavigationBarType.fixed,
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-              accountName: Text(_name),
-              accountEmail: Text(_email),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage("assets/images/budget.png"),
-              ),
-            ),
-            ListTile(
-              title: Text("Home"),
-              onTap: () {
-                Navigator.of(context).pushNamed('/client');
-              },
-            ),
-            ListTile(
-              title: const Text("Pengaturan"),
-              onTap: () {
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-            ListTile(
-              title: Text("Laporan"),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("Logout"),
-              onTap: () {
-                Navigator.of(context).pushNamed('/');
-              },
-            )
-          ],
-        ),
-      ),
-      body: Center(
-        child: Text(
-            "Hi " + _name + "\n(Client)",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold
-            )
-        ),
+      body: SafeArea(
+        child: pages[selectedIndex],
       ),
     );
   }

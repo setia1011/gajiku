@@ -22,7 +22,7 @@ class _GaAdminState extends State<GaAdmin> {
 
   var selectedIndex = 0;
   var pages = [
-    GaSuperHome(),
+    GaAdminHome(),
     BankingTransfer(),
     BankingPayment(),
     BankingSaving(),

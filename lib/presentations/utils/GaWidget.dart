@@ -80,9 +80,9 @@ class TopCard extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                Icon(Icons.account_balance_wallet, color: Banking_Primary, size: 30).paddingOnly(top: 8, left: 8),
+                const Icon(Icons.terminal, color: Banking_Primary, size: 30).paddingOnly(top: 8, left: 8),
                 Text(name, style: primaryTextStyle(size: 18)).paddingOnly(left: 8, top: 8).expand(),
-                Icon(Icons.info, color: Banking_greyColor, size: 20).paddingOnly(right: 8)
+                const Icon(Icons.info, color: Banking_greyColor, size: 20).paddingOnly(right: 8)
               ],
             ),
           ),
@@ -98,6 +98,51 @@ class TopCard extends StatelessWidget {
             children: [
               Text("Balance", style: secondaryTextStyle(size: 16)).paddingOnly(left: 8, top: 8, bottom: 8),
               Text(bal, style: primaryTextStyle(color: Banking_TextLightGreenColor)).paddingOnly(right: 8, top: 8, bottom: 8),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ProjectCard extends StatelessWidget {
+  final String name;
+  final String projectName;
+  final String responsible;
+
+  ProjectCard({Key? key, required this.name, required this.projectName, required this.responsible}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: context.width(),
+      height: context.height(),
+      color: context.cardColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                const Icon(Icons.terminal, color: Banking_Primary, size: 30).paddingOnly(top: 8, left: 8),
+                Text(name, style: primaryTextStyle(size: 18)).paddingOnly(left: 8, top: 8).expand(),
+                const Icon(Icons.info, color: Banking_greyColor, size: 20).paddingOnly(right: 8)
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Name", style: secondaryTextStyle(size: 16)).paddingOnly(left: 8, top: 8, bottom: 8),
+              Text(projectName, style: primaryTextStyle(color: Banking_TextColorYellow)).paddingOnly(right: 8, top: 8, bottom: 8),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Responsible", style: secondaryTextStyle(size: 16)).paddingOnly(left: 8, top: 8, bottom: 8),
+              Text(responsible, style: primaryTextStyle(color: Banking_TextLightGreenColor)).paddingOnly(right: 8, top: 8, bottom: 8),
             ],
           )
         ],

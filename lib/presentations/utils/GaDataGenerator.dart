@@ -114,6 +114,18 @@ List<BankingPaymentModel> bankingPaymentList() {
   return list;
 }
 
+List<BankingPaymentModel> gajikuClientGajiList() {
+  List<BankingPaymentModel> list = [];
+
+  var list1 = BankingPaymentModel(title: "Project", img: Banking_ic_Mobile, color: Banking_Primary);
+  list.add(list1);
+
+  var list2 = BankingPaymentModel(title: "Subscribe", img: Banking_ic_Mobile);
+  list.add(list2);
+
+  return list;
+}
+
 List<BankingPaymentModel> gajikuMasterGajiList() {
   List<BankingPaymentModel> list = [];
 
@@ -163,6 +175,18 @@ List<BankingPaymentModel> bankingPaymentDetailList() {
   list.add(list1);
 
   var list2 = BankingPaymentModel(title: "View Payment History", img: Banking_ic_History);
+  list.add(list2);
+
+  return list;
+}
+
+List<BankingPaymentModel> clientProjectList() {
+  List<BankingPaymentModel> list = [];
+
+  var list1 = BankingPaymentModel(title: "Global Institute", img: Banking_ic_Voice, color: Banking_Primary);
+  list.add(list1);
+
+  var list2 = BankingPaymentModel(title: "Sekolah Tinggi Ilmu Pelayaran", img: Banking_ic_History);
   list.add(list2);
 
   return list;
