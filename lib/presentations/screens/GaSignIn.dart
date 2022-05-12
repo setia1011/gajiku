@@ -34,6 +34,7 @@ class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
   void initState() {
     setStatusBarColor(appStore.isDarkModeOn ? black : white);
     authBloc = BlocProvider.of<GaAuthBloc>(context);
+    BlocProvider.of<GaAuthBloc>(context).add(LoginStartEvent());
     super.initState();
   }
 
@@ -47,8 +48,8 @@ class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
     animationController.reverse(from: 1.0);
     animation.addStatusListener((status) {
       if (status == AnimationStatus.dismissed) {
-        animationController.stop();
-        BlocProvider.of<GaAuthBloc>(context).add(LoginStartEvent());
+        // animationController.stop();
+        // BlocProvider.of<GaAuthBloc>(context).add(LoginStartEvent());
       }
     });
     animationController.addListener(() {
@@ -199,6 +200,8 @@ class _GaSignInState extends State<GaSignIn> with TickerProviderStateMixin {
             Navigator.pushNamed(context, '/dashboard');
           } else if (state is ManagerLoginSuccessState) {
             Navigator.pushNamed(context, '/manager');
+          } else if (state is SuperLoginSuccessState) {
+            Navigator.pushNamed(context, "/super");
           }
         },
         child: blocBuilder2,

@@ -3,8 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class GaManager extends StatefulWidget {
-  const GaManager({Key? key}) : super(key: key);
-
   @override
   State<GaManager> createState() => _GaManagerState();
 }

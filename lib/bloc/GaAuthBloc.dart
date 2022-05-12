@@ -35,18 +35,26 @@ class GaAuthBloc extends Bloc<GaAuthEvent, GaAuthState> {
             pref.setString("username", userInfo['username']);
             pref.setString("email", userInfo['email']);
             pref.setString("name", userInfo['name']);
-            pref.setInt("id_type", userInfo['id_type']);
-            pref.setString("id_type_name", userInfo['ref_id_type']['id_type']);
-            pref.setString("id_number", userInfo['id_number']);
-            pref.setString("phone", userInfo['phone']);
-            pref.setString("address", userInfo['address']);
+            pref.setInt("id_type", userInfo['id_type'] ?? 0);
+            print(userInfo['ref_id_type']);
+            if (userInfo['ref_id_type'] != null) {
+              pref.setString("id_type_name", userInfo['ref_id_type']['id_type']);
+            } else {
+              pref.setString("id_type_name", "");
+            }
+            pref.setString("id_number", userInfo['id_number'] ?? "");
+            pref.setString("phone", userInfo['phone'] ?? "");
+            pref.setString("address", userInfo['address'] ?? "");
             pref.setString("status", userInfo['status']);
             pref.setInt("group_id", userInfo['group_id']);
+            pref.setString("group_name", userInfo["ref_group"]["group_name"]);
 
             if (pref.getInt("group_id") == 1) {
-              emit(AdminLoginSuccessState());
+              emit(SuperLoginSuccessState());
             } else if (pref.getInt("group_id") == 2) {
               emit(ManagerLoginSuccessState());
+            } else if (pref.getInt("group_id") == 3) {
+              emit(AdminLoginSuccessState());
             } else {
               emit(ClientLoginSuccessState());
             }

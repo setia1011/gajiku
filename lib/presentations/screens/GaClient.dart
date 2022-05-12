@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class GaClient extends StatefulWidget {
-  const GaClient({Key? key}) : super(key: key);
 
   @override
   State<GaClient> createState() => _GaClientState();

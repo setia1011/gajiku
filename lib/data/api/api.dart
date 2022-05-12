@@ -6,4 +6,5 @@ class BaseUrl {
   static String urlActivation = url + "user/activation/";
   static String urlFindIdType = url + "reference/id-type/";
   static String urlUpdateProfile = url + "user/update/";
+  static String urlChangePassword = url + "user/password/";
 }

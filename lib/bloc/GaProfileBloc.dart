@@ -6,7 +6,6 @@ import 'package:gajiku/data/repositories/GaProfileRepo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/repositories/GaUserInfoRepo.dart';
 
-
 class GaProfileBloc extends Bloc<GaProfileEvent, GaProfileState> {
   GaProfileRepo gaProfileRepo;
   GaUserInfoRepo userInfoRepo;
@@ -43,15 +42,10 @@ class GaProfileBloc extends Bloc<GaProfileEvent, GaProfileState> {
           } else {
             emit(ErrorState(message: parsed["detail"].toString()));
           }
-          // if (parsed.containsKey("data") && parsed["data"] != null) {
-          //   emit(SentState(message: parsed["data"].toString()));
-          // } else {
-          //   emit(ErrorState(message: parsed["detail"].toString()));
-          // }
         } else {
           emit(ErrorState(message: "Terjadi kesalahan"));
         }
-      } on Exception catch(e) {
+      } on Exception {
         emit(ErrorState(message: "Terjadi kesalahan"));
       }
     });

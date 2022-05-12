@@ -339,7 +339,7 @@ packages:
     source: sdk
     version: "0.0.0"
   fluttertoast:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: fluttertoast
       url: "https://pub.dartlang.org"
@@ -753,13 +753,6 @@ packages:
     dependency: transitive
     description:
       name: stream_transform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
-  streaming_shared_preferences:
-    dependency: "direct main"
-    description:
-      name: streaming_shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"

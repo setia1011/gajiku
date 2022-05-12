@@ -1,5 +1,7 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gajiku/bloc/GaProfileBloc.dart';
 import 'package:gajiku/main.dart';
-import 'package:gajiku/presentations/screens/BankingChangePasword.dart';
+import 'package:gajiku/presentations/screens/GaChangePasword.dart';
 import 'package:gajiku/presentations/screens/GaProfileUpdate.dart';
 import 'package:gajiku/presentations/utils/GaColors.dart';
 import 'package:gajiku/presentations/utils/GaImages.dart';
@@ -7,6 +9,9 @@ import 'package:gajiku/presentations/utils/GaStrings.dart';
 import 'package:gajiku/presentations/utils/GaWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../../bloc/GaProfileState.dart';
+
 
 class GaProfile extends StatefulWidget {
   static var tag = "/BankingMenu";
@@ -22,6 +27,7 @@ class _GaProfileState extends State<GaProfile> {
   getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      name = prefs.getString("name").toString();
       idNumber = prefs.getString("id_number").toString();
     });
   }
@@ -31,6 +37,7 @@ class _GaProfileState extends State<GaProfile> {
     getPref();
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,29 +51,38 @@ class _GaProfileState extends State<GaProfile> {
               16.height,
               Container(
                 padding: const EdgeInsets.all(8),
-                // decoration: boxDecorationWithShadow(
-                //   borderRadius: BorderRadius.circular(10),
-                //   backgroundColor: context.cardColor,
-                // ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const CircleAvatar(backgroundImage: AssetImage(Banking_ic_user1), radius: 40),
-                    10.width,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        5.height,
-                        Text(name, style: boldTextStyle(size: 18)),
-                        5.height,
-                        Text(idNumber, style: primaryTextStyle(color: Banking_TextColorSecondary)),
-                        5.height,
-                        Text(Banking_lbl_app_Name, style: secondaryTextStyle()),
-                      ],
-                    ).expand()
-                  ],
+                decoration: boxDecorationWithShadow(
+                  borderRadius: BorderRadius.circular(10),
+                  backgroundColor: context.cardColor,
                 ),
+                child: BlocConsumer<GaProfileBloc, GaProfileState>(
+                  listener: (context, state) {
+                    if (state is SentState) {
+                      getPref();
+                    }
+                  },
+                  builder: (context, state) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const CircleAvatar(backgroundImage: AssetImage(Banking_ic_user1), radius: 40),
+                        10.width,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            5.height,
+                            Text(name, style: boldTextStyle(size: 18)),
+                            5.height,
+                            Text(idNumber, style: primaryTextStyle(color: Banking_TextColorSecondary)),
+                            5.height,
+                            Text(Banking_lbl_app_Name, style: secondaryTextStyle()),
+                          ],
+                        ).expand()
+                      ],
+                    );
+                  },
+                )
               ),
               16.height,
               const Text(
@@ -89,7 +105,7 @@ class _GaProfileState extends State<GaProfile> {
                       GaProfileUpdate().launch(context);
                     }),
                     bankingOption(Banking_ic_security, Banking_lbl_Change_Password, Banking_pinkColor).onTap(() {
-                      BankingChangePassword().launch(context);
+                      GaChangePassword().launch(context);
                     }),
                   ],
                 ),
@@ -142,8 +158,8 @@ dialogContent(BuildContext context) {
       color: appStore.isDarkModeOn ? Colors.black :  Colors.white,
       shape: BoxShape.rectangle,
       borderRadius: BorderRadius.circular(10),
-      boxShadow: [
-        BoxShadow(color: Colors.black26, blurRadius: 10.0, offset: const Offset(0.0, 10.0)),
+      boxShadow: const [
+        BoxShadow(color: Colors.black26, blurRadius: 10.0, offset: Offset(0.0, 10.0)),
       ],
     ),
     child: Column(
@@ -153,7 +169,7 @@ dialogContent(BuildContext context) {
         Text(Banking_lbl_Confirmation_for_logout, style: primaryTextStyle(size: 18)).onTap(() {
           finish(context);
         }).paddingOnly(top: 8, bottom: 8),
-        Divider(height: 10, thickness: 1.0, color: Banking_greyColor),
+        const Divider(height: 10, thickness: 1.0, color: Banking_greyColor),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -164,9 +180,14 @@ dialogContent(BuildContext context) {
               },
             ).paddingRight(16),
             Container(width: 1.0, height: 40, color: Banking_greyColor).center(),
-            Text("Logout", style: primaryTextStyle(size: 18, color: Banking_Primary)).onTap(
-                  () {
-                finish(context);
+            Text("Logout",
+                style: primaryTextStyle(size: 18, color: Banking_Primary)).onTap(() {
+                  logout() async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    await prefs.clear();
+                  }
+                  logout();
+                  Navigator.of(context).pushNamed("/login");
               },
             ).paddingLeft(16)
           ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gajiku/presentations/screens/BankingMenu.dart';
 import 'package:gajiku/presentations/screens/BankingPayment.dart';
 import 'package:gajiku/presentations/screens/BankingSaving.dart';
 import 'package:gajiku/presentations/screens/BankingTransfer.dart';
@@ -12,13 +11,13 @@ import 'package:nb_utils/nb_utils.dart';
 
 import 'GaAdminHome.dart';
 
-class GaAdmin extends StatefulWidget {
+class GaSuper extends StatefulWidget {
 
   @override
-  _GaAdminState createState() => _GaAdminState();
+  _GaSuperState createState() => _GaSuperState();
 }
 
-class _GaAdminState extends State<GaAdmin> {
+class _GaSuperState extends State<GaSuper> {
 
   var selectedIndex = 0;
   var pages = [

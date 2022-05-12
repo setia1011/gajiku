@@ -1,12 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:gajiku/presentations/model/GaModel.dart';
 import 'package:gajiku/presentations/utils/GaColors.dart';
-import 'package:gajiku/presentations/utils/GaContants.dart';
 import 'package:gajiku/presentations/utils/GaDataGenerator.dart';
 import 'package:gajiku/presentations/utils/GaImages.dart';
 import 'package:gajiku/presentations/utils/GaWidget.dart';

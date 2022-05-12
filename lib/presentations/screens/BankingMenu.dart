@@ -1,5 +1,5 @@
 import 'package:gajiku/main.dart';
-import 'package:gajiku/presentations/screens/BankingChangePasword.dart';
+import 'package:gajiku/presentations/screens/GaChangePasword.dart';
 import 'package:gajiku/presentations/screens/BankingContact.dart';
 import 'package:gajiku/presentations/screens/BankingLocation.dart';
 import 'package:gajiku/presentations/screens/BankingNews.dart';
@@ -101,7 +101,7 @@ class _BankingMenuState extends State<BankingMenu> {
                       },
                     ),
                     bankingOption(Banking_ic_security, Banking_lbl_Change_Password, Banking_pinkColor).onTap(() {
-                      BankingChangePassword().launch(context);
+                      GaChangePassword().launch(context);
                     }),
                     bankingOption(
                       Banking_ic_Share,
