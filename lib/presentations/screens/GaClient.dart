@@ -55,9 +55,9 @@ class _GaClientState extends State<GaClient> {
         unselectedItemColor: Banking_greyColor.withOpacity(0.5),
         items: const <BankingBottomNavigationBarItem>[
           BankingBottomNavigationBarItem(icon: Banking_ic_Home, title: Text(Banking_lbl_Home)),
-          BankingBottomNavigationBarItem(icon: Banking_ic_Transfer, title: Text(Banking_lbl_Transfer)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Transfer, title: Text(Gajiku_lbl_client_project)),
           BankingBottomNavigationBarItem(icon: Banking_ic_Payment, title: Text(Banking_lbl_Payment)),
-          BankingBottomNavigationBarItem(icon: Banking_ic_Saving, title: Text(Banking_lbl_Saving)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Saving, title: Text(Gajiku_lbl_client_history)),
           BankingBottomNavigationBarItem(icon: Banking_ic_Menu, title: Text(Banking_lbl_Menu)),
         ],
         currentIndex: selectedIndex,

@@ -3,6 +3,7 @@ import 'package:gajiku/presentations/screens/BankingPayment.dart';
 import 'package:gajiku/presentations/screens/BankingSaving.dart';
 import 'package:gajiku/presentations/screens/BankingTransfer.dart';
 import 'package:gajiku/presentations/screens/GaProfile.dart';
+import 'package:gajiku/presentations/screens/GaSuperHome.dart';
 import 'package:gajiku/presentations/utils/GaBottomNavigationBar.dart';
 import 'package:gajiku/presentations/utils/GaColors.dart';
 import 'package:gajiku/presentations/utils/GaImages.dart';
@@ -21,7 +22,7 @@ class _GaSuperState extends State<GaSuper> {
 
   var selectedIndex = 0;
   var pages = [
-    GaAdminHome(),
+    GaSuperHome(),
     BankingTransfer(),
     BankingPayment(),
     BankingSaving(),
@@ -54,9 +55,9 @@ class _GaSuperState extends State<GaSuper> {
         unselectedItemColor: Banking_greyColor.withOpacity(0.5),
         items: const <BankingBottomNavigationBarItem>[
           BankingBottomNavigationBarItem(icon: Banking_ic_Home, title: Text(Banking_lbl_Home)),
-          BankingBottomNavigationBarItem(icon: Banking_ic_Transfer, title: Text(Banking_lbl_Transfer)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Transfer, title: Text(Gajiku_lbl_admin_user)),
           BankingBottomNavigationBarItem(icon: Banking_ic_Payment, title: Text(Banking_lbl_Payment)),
-          BankingBottomNavigationBarItem(icon: Banking_ic_Saving, title: Text(Banking_lbl_Saving)),
+          BankingBottomNavigationBarItem(icon: Banking_ic_Saving, title: Text(Gajiku_lbl_admin_laporan)),
           BankingBottomNavigationBarItem(icon: Banking_ic_Menu, title: Text(Banking_lbl_Menu)),
         ],
         currentIndex: selectedIndex,
